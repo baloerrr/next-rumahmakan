@@ -173,13 +173,13 @@ const TableGallery = () => {
                   </h5>
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
-                  {/* <Image
+                  <Image
                     src={galleryItem.img}
                     alt={galleryItem.class_name}
                     width={100}
                     height={100}
                     className="object-cover"
-                  /> */}
+                  />
                   {/* <img src={galleryItem.img} alt={galleryItem.class_name} width={100} height={100} className="object-cover" /> */}
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
