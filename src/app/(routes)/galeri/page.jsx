@@ -1,34 +1,16 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Image from 'next/image';
 import ikan from '../../../../public/assets/ikan.png'; // Fallback image
+import useGallery from "../../../hooks/useGallery";
+
 
 export default function Page() {
-    const [galleryData, setGalleryData] = useState([]);
-    const [error, setError] = useState(null);
+    const {
+        galleryData,
+        error,
+      } = useGallery();
 
-    useEffect(() => {
-        handleGetData();
-    }, []);
-
-    const handleGetData = async () => {
-        try {
-            const response = await axios.get(`/api/gallery/read`);
-            console.log("API Response:", response.data.data);
-
-            if (Array.isArray(response.data.data)) {
-                setGalleryData(response.data.data);
-            } else {
-                console.error("Unexpected data format:", response.data);
-                setError("Unexpected data format from API");
-            }
-        } catch (error) {
-            console.error("Error:", error.message);
-            setError(error.message);
-        }
-    };
 
     return (
         <div className='h-[100vh] overflow-hidden'>
