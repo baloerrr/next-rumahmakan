@@ -1,114 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
+import useGallery from "../../hooks/useGallery";
 import Image from "next/image";
 
 const TableGallery = () => {
-  const [galleryData, setGalleryData] = useState([]);
-  const [newGallery, setNewGallery] = useState({
-    class_name: "slower-1",
-    img: null,
-  });
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    handleGetData();
-  }, []);
-
-  const handleSelectChange = (e) => {
-    setNewGallery({ ...newGallery, class_name: e.target.value });
-  };
-
-  const handleGetData = async () => {
-    try {
-      const response = await axios.get(`/api/gallery/read`);
-
-      if (Array.isArray(response.data.data)) {
-        setGalleryData(response.data.data);
-        console.log(response.data.data);
-      } else {
-        console.error("Unexpected data format:", response.data);
-        setError("Unexpected data format from API");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error:", error.message);
-        setError(error.message); 
-        console.log("Data failed to fetch");
-      }
-    }
-  };
-
-  const handleAdd = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("class_name", newGallery.class_name);
-      formData.append("img", newGallery.img); // Append the file object
-
-      const response = await axios.post(`/api/gallery/create`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      const addedGallery = response.data;
-      setGalleryData([...galleryData, addedGallery]);
-      setNewGallery({ class_name: "", img: null });
-      console.log("Data successfully added");
-
-      handleGetData();
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error:", error.message);
-        console.log("Data failed to add");
-      }
-    }
-  };
-
-  const handleFileChange = (e) => {
-    setNewGallery({ ...newGallery, img: e.target.files[0] });
-  };
-
-  const handleDelete = async (packageItem) => {
-    try {
-      if (!confirm("Apakah anda yakin mau menghapus data gallery ini?")) return;
-
-      const response = await axios.delete(`/api/gallery/delete`, {
-        headers: { "Content-Type": "application/json" },
-        data: {
-          idGallery: packageItem?.idGallery,
-        },
-      });
-
-      setGalleryData(
-        galleryData.filter((item) => item.idGallery !== packageItem.idGallery)
-      );
-
-      console.log("Data success deleted");
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error:", error?.message);
-        console.log("Data failed delete");
-      }
-    }
-  };
-
-//   async function getTentangKamiImageDownloadURL(imageFileName) {
-//     const imgRef = ref(storage, `tentangkami/${imageFileName}`);
-//     try {
-//       const downloadURL = await getDownloadURL(imgRef);
-//       console.log(downloadURL);
-//       return downloadURL;
-//     } catch (error) {
-//       console.error("Error getting download URL:", error);
-//       throw error;
-//     }
-//   }
-
-//   getTentangKamiImageDownloadURL("tentang.JPG")
-
-
+  const {
+    galleryData,
+    newGallery,
+    error,
+    handleAdd,
+    handleDelete,
+    handleSelectChange,
+    handleFileChange,
+  } = useGallery();
 
   return (
     <div className="container mx-auto p-4">
@@ -180,7 +84,6 @@ const TableGallery = () => {
                     height={100}
                     className="object-cover"
                   />
-                  {/* <img src={galleryItem.img} alt={galleryItem.class_name} width={100} height={100} className="object-cover" /> */}
                 </td>
                 <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                   <button
