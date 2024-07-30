@@ -4,17 +4,17 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const useGallery = () => {
-  const [galeries, setGaleries] = useState([]);
+  const [ulasans, setUlasans] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
   useEffect(() => {
-    const fetchGaleries = async () => {
+    const fetchUlasans = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${baseURL}/api/galery`);
-        setGaleries(response.data.data);
+        const response = await axios.get(`${baseURL}/api/ulasan`);
+        setUlasans(response.data.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -22,10 +22,10 @@ const useGallery = () => {
       }
     };
 
-    fetchGaleries();
+    fetchUlasans();
   }, [baseURL]);
 
-  return { galeries, loading, error };
+  return { ulasans, loading, error };
 };
 
 export default useGallery;

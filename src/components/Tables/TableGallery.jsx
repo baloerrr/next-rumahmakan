@@ -4,15 +4,10 @@ import useGallery from "../../hooks/useGallery";
 import Image from "next/image";
 
 const TableGallery = () => {
-  const {
-    galleryData,
-    newGallery,
-    error,
-    handleAdd,
-    handleDelete,
-    handleSelectChange,
-    handleFileChange,
-  } = useGallery();
+  const { galeries, loading, error } = useGallery();
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading menus: {error.message}</p>;
 
   return (
     <div className="container mx-auto p-4">

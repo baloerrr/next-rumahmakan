@@ -1,54 +1,40 @@
-'use client';
+"use client";
 import CardMenu from "@/components/CardMenu";
 import axios from "axios";
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import useMenu from "../../../hooks/useMenu";
+
 
 export default function Menu() {
-  const [error, setError] = useState(null);
-  const [menuData, setMenuData] = useState([]);
+  const { menus, loading, error } = useMenu();
 
-  const container = useRef(null);
+const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start start', 'end end']
   });
 
-  const handleGetData = async () => {
-    try {
-      const response = await axios.get(`/api/menu/read`);
 
-      if (Array.isArray(response.data.data)) {
-        setMenuData(response.data.data);
-        console.log(response.data.data);
-      } else {
-        console.error("Unexpected data format:", response.data);
-        setError("Unexpected data format from API");
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-      setError(error.message); // Set error state
-    }
-  };
-
-  useEffect(() => {
-    handleGetData();
-  }, []);
-
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading menus: {error.message}</p>;
   return (
     <div ref={container} className="mt-[90px]">
-      {menuData.length > 0 ? (
-        menuData.map((data, i) => {
-          const targetScale = 1 - ((menuData.length - i) * 0.05);
+      {menus.length > 0 ? (
+        menus.map((data, i) => {
+          const targetScale = 1 - (menus.length - i) * 0.05;
+          const productArray = JSON.parse(data.product);
           return (
             <CardMenu
               key={i}
               i={i}
               nama={data.title}
-              menu={data.product}
-              gambar={data.img}
+              menu={productArray.map((product, index) => (
+                <span key={index}>{product}</span>
+              ))}    
+              gambar={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${data.image}`}
               progres={scrollYProgress}
-              range={[i * 0.10, 0.9]}
+              range={[i * 0.1, 0.9]}
               targetScale={targetScale}
             />
           );

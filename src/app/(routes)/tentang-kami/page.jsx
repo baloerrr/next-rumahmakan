@@ -1,16 +1,15 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import hero from '../../../../public/assets/Hero.svg';
-import tentang from '../../../../public/assets/tentang.JPG';
 import Image from 'next/image';
 import Lenis from 'lenis';
-import axios from 'axios'; // Add this import
+import useTentangKami from "../../../hooks/useTentangKami";
+
 
 export default function Page() {
-  const [tentangKamiData, setTentangKamiData] = useState([]);
-  const [error, setError] = useState(null);
+  const { tentangKamis, loading, error } = useTentangKami();
 
+ 
   useEffect(() => {
     const lenis = new Lenis();
 
@@ -22,30 +21,17 @@ export default function Page() {
     requestAnimationFrame(raf);
   }, []);
 
-  useEffect(() => {
-    handleGetData();
-  }, []);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading menus: {error.message}</p>;
 
-  const handleGetData = async () => {
-    try {
-      const response = await axios.get(`/api/tentangKami/read`);
-      if (Array.isArray(response.data.data)) {
-        setTentangKamiData(response.data.data);
-      } else {
-        setError("Unexpected data format from API");
-      }
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
   return (
     <section className='mt-[60px] w-full'>
-      {tentangKamiData.map((item, index) => (
+      {tentangKamis.map((item, index) => (
         <div key={index} className='md:mx-28 grid grid-cols-12 h-[95vh]'>
           <div className='col-span-12 md:col-span-5 flex justify-center items-center'>
             <Image 
-              src={item.banner} 
+              src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/storage/${item.banner}` } 
               className='md:h-[70%] h-full animate-floating object-cover md:rounded-lg shadow-md' 
               alt={item.title} 
               width={800}
