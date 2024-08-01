@@ -19,7 +19,7 @@ export default function Sejarah({ scrollYProgress }) {
                     <h1 className='md:text-5xl text-3xl text-[#4F6C51]'>Lebih Dari 5+ Tahun Bergerak Di Bidang Kuliner</h1>
                 </div>
                 <div className=' flex  items-center justify-center lg:py-0 md:py-10'>
-                    <iframe className='rounded-xl shadow-xl lg:w-[560px] w-full h-[400px]' src="https://www.youtube.com/embed/nZ2LDB7Q7Rk?si=jdlI5S4HyarOI_Qt" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe className='rounded-xl shadow-xl lg:w-[560px] w-full h-[400px]' src="https://youtu.be/Kg2hLBI4t2c?si=V0A3vRtR0W5K1Rg8" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
 
                 <div className='flex flex-col gap-5 font-bold md:mx-0 lg:mx-10'>
