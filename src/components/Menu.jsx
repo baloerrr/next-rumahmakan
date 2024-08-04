@@ -3,11 +3,12 @@ import Image from "next/image";
 import ayam from '../../public/assets/ayam.png';
 import minuman from '../../public/assets/minuman.png';
 import ikan from '../../public/assets/ikan.png';
+import Link from 'next/link';
 
 export default function Menu() {
     return (
         <div className='relative'>
-                <div className='grid grid-cols-12 gap-5 md:gap-0 py-20 md:py-36 lg:mx-16 mx-6 md:mx-6 sm:mx-10'>
+            <div className='grid grid-cols-12 gap-5 md:gap-0 py-20 md:py-36 lg:mx-16 mx-6 md:mx-6 sm:mx-10'>
                 <div className='col-span-12 md:order-1 order-2 md:col-span-6 flex flex-col justify-center gap-5 font-bold md:mx-0 lg:mx-10'>
                     <h3 className='font-medium hidden md:block text-[#A98A55]'>Menu</h3>
                     <h1 className='text-5xl hidden md:block text-[#4F6C51]'>Top Menu yang menjadi Incaran Wisatawan</h1>
@@ -15,7 +16,11 @@ export default function Menu() {
                         Lesehan Bakso Palapa merupakan sebuah usaha yang bergerak di bidang kuliner sejak tahun 2019. Lesehan ini memberikan pengalaman bersantap yang berbeda karena dikelilingi oleh keindahan Pagar Alam seperti bukit hijau, gunung Dempo.
                     </p>
                     <div className='w-full flex md:justify-start justify-between gap-7'>
-                        <Button className='bg-[#A98A55] md:px-8 px-24 text-white' radius='full' variant="shadow">Lihat Lebih Banyak</Button>
+                        <Button className='bg-[#A98A55] w-full md:w-fit md:px-8 px-24 text-white' radius='full' variant="shadow">
+                            <Link href="/menu" className="w-full h-full flex items-center justify-center">
+                                Lihat Lebih Banyak
+                            </Link>
+                        </Button>
                     </div>
                 </div>
                 <div className='md:col-span-6 col-span-12 md:order-2 order-1'>

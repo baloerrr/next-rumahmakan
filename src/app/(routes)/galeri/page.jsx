@@ -8,12 +8,11 @@ export default function Page() {
   const { galeries, loading, error } = useGallery();
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading menus: {error.message}</p>;
+  if (error) return <p>Error loading galleries: {error.message}</p>;
 
   return (
-    <div className="h-[100vh] overflow-hidden">
+    <div className="h-screen overflow-hidden">
       <div className="horizontal-scroll-wrapper">
-        {error && <div>Error: {error}</div>}
         {galeries.length > 0 ? (
           galeries.map((galery, index) => (
             <div key={index} className={`img-wrapper ${galery.classname}`}>

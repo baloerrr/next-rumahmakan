@@ -9,24 +9,6 @@
     z-index: 30;
 }
 
-/* .custom-scrollbar {
-    scrollbar-width: thin;
-    scrollbar-color: #A98A55 transparent;
-}
-
-.custom-scrollbar::-webkit-scrollbar {
-    width: 12px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #A98A55;
-    border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent;
-} */
-
 ::-webkit-scrollbar {
     width: 1px;
     height: 1px;
@@ -37,6 +19,7 @@
     height: 1px;
 }
 
+/* Default Styles for larger screens (vertical scroll) */
 .horizontal-scroll-wrapper {
     display: flex;
     flex-direction: column;
@@ -58,14 +41,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 40vh;
-    transform-origin: 50% 50%;
-    transform: rotate(90deg) translateZ(.1px) scale(0.9) translateX(0) translateY(-3vh);
-    transition: 1s;
-}
-
-.img-wrapper {
     min-height: 65vh;
+    transform-origin: 50% 50%;
+    transition: 1s;
 }
 
 .img-wrapper a {
@@ -81,49 +59,21 @@
     max-height: 80vh;
     transition: 0.5s;
     vertical-align: top;
-    filter: saturate(40%) sepia(30%) hue-rotate(5deg );
+    filter: saturate(40%) sepia(30%) hue-rotate(5deg);
 }
 
 a:hover .img {
     filter: none;
 }
 
-
 .slower-1 {
     transform: rotate(90deg) translateZ(-0.2px) scale(1.1) translateX(0) translateY(-10vh);
     margin: 100px;
 }
 
-.slower-2 {
-    transform: rotate(90deg) translateZ(-0.25px) scale(2.5) translateX(0) translateY(-5vh);
-    margin: 100px;
-}
+/* Add other slower classes here... */
 
-.slower-3 {
-    transform: rotate(90deg) translateZ(-0.3px) scale(1.3) translateX(0) translateY(-20vh);
-    margin: 100px;
-}
-
-.slower-4 {
-    transform: rotate(90deg) translateZ(-0.6px) scale(1.7) translateX(0) translateY(12vh);
-    margin: 100px;
-}
-
-.slower-5 {
-    transform: rotate(90deg) translateZ(-0.1px) scale(1.2) translateX(0) translateY(-3vh);
-    margin: 100px;
-}
-
-.slower-6 {
-    transform: rotate(90deg) translateZ(-0.7px) scale(1.1) translateX(0) translateY(30vh);
-    margin: 100px;
-}
-
-.slower-7 {
-    transform: rotate(90deg) translateZ(-0.2px) scale(1.1) translateX(0) translateY(-11vh);
-    margin: 100px;
-}
-
+/* Keyframes for floating animation */
 @keyframes floating {
     0% {
         transform: translateY(0);
@@ -140,4 +90,30 @@ a:hover .img {
 
 .animate-floating {
     animation: floating 3s ease-in-out infinite;
+}
+
+/* Mobile Styles (horizontal scroll) */
+@media (max-width: 768px) { /* Adjust the max-width as needed */
+    .horizontal-scroll-wrapper {
+        transform: rotate(0deg) translate3d(0, 0, 0);
+        transform-origin: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100vw;
+        height: auto;
+        padding-bottom: 0;
+        display: flex; /* Ensure horizontal scrolling */
+        flex-direction: row; /* Align items horizontally */
+        align-items: center; /* Center items vertically */
+    }
+
+    .img-wrapper {
+        transform: rotate(0deg) translateZ(0) scale(1) translateX(0) translateY(0);
+        min-height: auto; /* Adjust based on content */
+    }
+
+    .img {
+        max-width: 100vw; /* Ensure images fit horizontally */
+        max-height: 60vh; /* Adjust height based on your needs */
+    }
 }

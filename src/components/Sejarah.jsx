@@ -4,6 +4,7 @@ import pettern from '../../public/assets/pettern.png'
 import React from 'react'
 import Image from 'next/image'
 import { useTransform, motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function Sejarah({ scrollYProgress }) {
     const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
@@ -27,9 +28,16 @@ export default function Sejarah({ scrollYProgress }) {
                     <h1 className='text-5xl hidden lg:block text-[#4F6C51]'>Lebih Dari 5+ Tahun Bergerak Di Bidang Kuliner</h1>
                     <p className='font-light md:text-xl lg:text-base  text-justify'>Lesehan Bakso Palapa merupakan sebuah usaha yang bergerak di bidang kuliner sejak tahun 2019. Lesehan ini memberikan pengalaman bersantap yang berbeda karena dikelilingi oleh keindahan Pagar Alam seperti bukit hijau, gunung Dempo, dan bangunan adat Rumah Baghi sehingga memberikan sentuhan lokal. Keistimewaan Lesehan Bakso Palapa terletak pada menu spesialnya yaitu gulai kepala kambing. Selain itu, terdapat menu pilihan yang terdiri dari aneka bakso, mie, paket nasi ayam, nasi ikan dan nasi goreng.</p>
                     <div className='w-full flex md:justify-start justify-between gap-7'>
-                        <Button className='bg-[#A98A55] md:px-8 px-16 text-white' radius='full' variant="shadow"> Shadow</Button>
-                        <Button className='border-[#A98A55] md:px-8 px-16 text-[#A98A55]' radius='full' variant="bordered">Galeri</Button>
-
+                        <Button className='bg-[#A98A55] md:px-8 px-16 text-white' radius='full' variant="shadow">
+                            <Link href="/pedoman-merk" className="w-full h-full flex items-center justify-center">
+                                Pedoman Merk
+                            </Link>
+                        </Button>
+                        <Button className='border-[#A98A55] md:px-8 px-16 text-[#A98A55]' radius='full' variant="bordered">
+                            <Link href="/galeri" className="w-full h-full flex items-center justify-center">
+                                Galeri
+                            </Link>
+                        </Button>
                     </div>
                 </div>
             </div>
